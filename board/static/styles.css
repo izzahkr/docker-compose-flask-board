@@ -1,108 +1,81 @@
 * {
     box-sizing: border-box;
 }
-
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
-    background-color: #f4f4f4;
+    background-color: #f0f8ff; /* Light background for a softer look */
     color: #333;
 }
-
 header {
-    background: linear-gradient(90deg, #007bff, #0056b3);
+    background: linear-gradient(to right, #007bff, #0056b3); /* Gradient background */
     color: white;
-    padding: 20px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 30px 0; /* Increased padding for a bolder header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
-
 h1 {
     margin: 0;
-    font-size: 2.5em;
+    font-size: 2.5em; /* Larger font size for the heading */
 }
-
 nav ul {
     list-style-type: none;
     padding: 0;
 }
-
 nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin: 0 20px; /* Slightly more space between items */
 }
-
 nav a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    font-weight: bold; /* Bold text for navigation */
+    transition: color 0.3s; /* Smooth color transition */
 }
-
 nav a:hover {
-    color: #ffdd57; /* Tambahkan efek hover */
-    text-decoration: underline;
+    color: #ffe600; /* Change color on hover */
 }
-
 main {
-    padding: 20px;
-    margin: 20px auto;
-    width: 80%;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px 20px; /* More padding for content area */
+    margin: 0 auto;
+    width: 90%;
+    max-width: 800px; /* Limit maximum width for better readability */
+    background: white; /* White background for content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
-
 footer {
     margin-top: 20px;
-    padding: 10px 0;
+    padding: 15px 0;
     background: #007bff;
     color: white;
-    position: relative;
+    font-size: 0.9em; /* Slightly smaller footer text */
 }
-
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* More space between form groups */
 }
-
-input[type="text"],
-textarea {
+input[type="text"], textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Increased padding for inputs */
     margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: border-color 0.3s ease;
+    border: 1px solid #ccc; /* Border for input fields */
+    border-radius: 4px; /* Rounded corners */
+    transition: border-color 0.3s; /* Smooth border transition */
 }
-
-input[type="text"]:focus,
-textarea:focus {
-    border-color: #007bff;
-    outline: none;
+input[type="text"]:focus, textarea:focus {
+    border-color: #007bff; /* Highlight border on focus */
 }
-
 input[type="submit"] {
-    background: #007bff;
+    background: #0056b3;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 12px 20px; /* Increased padding for buttons */
     cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.3s ease;
+    border-radius: 4px; /* Rounded corners */
+    font-weight: bold; /* Bold text for button */
+    transition: background 0.3s; /* Smooth background transition */
 }
-
 input[type="submit"]:hover {
-    background: #0056b3;
-}
-
-@media (max-width: 600px) {
-    main {
-        width: 95%;
-    }
-
-    nav ul li {
-        display: block;
-        margin: 10px 0;
-    }
+    background: #004494; /* Darker shade on hover */
 }
