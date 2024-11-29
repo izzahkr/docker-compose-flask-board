@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-
 {% block header %}
 <h2>{% block title %}Posts{% endblock title %}</h2>
 {% endblock header %}
 {% block content %}
 {% for post in posts %}
 <article>
-    <p>{{ post['message'] }}</p>
-    <aside>Posted by {{ post['author'] }} on {{ post['created'].strftime("%b %d, %Y at %I:%M%p") }}</aside>
+    <p class="message">{{ post[1] }}</p> <!-- Pastikan tag <p> ditutup dengan benar -->
+
+    <aside>Posted by {{ post[0] }} on {{ post[2] }}</aside>
 </article>
 {% endfor %}
 {% endblock content %}

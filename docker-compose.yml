@@ -1,0 +1,38 @@
+services:
+  psql-db:
+    image: "postgres:14-bookworm"
+    hostname: psql-db
+    environment:
+      - POSTGRES_PASSWORD=P4ssw0rd
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=flask_db
+      - POSTGRES_HOST_AUTH_METHOD=password
+    restart: unless-stopped
+    volumes:
+      - ./psql-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
+  web:
+    build:  # Ensure this is correctly indented and structured
+      context: .  # Your build context, usually the current directory
+    working_dir: /flask
+    ports:
+      - "8080:5000"
+    networks:
+      - app-network
+    environment:
+      - FLASK_APP=board
+      - FLASK_ENV=development
+    command: "flask run --host=0.0.0.0 --port=5000"
+
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      - app-network
+    ports:
+      - "8081:8080"
+
+networks:
+  app-network:

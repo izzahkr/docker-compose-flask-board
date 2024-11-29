@@ -1,27 +1,40 @@
-import sqlite3
-import click
+import os
+import psycopg2
 from flask import current_app, g
 
+def get_pg_db_conn():
+    """Create a connection to the PostgreSQL database."""
+    return psycopg2.connect(
+        host=os.getenv("POSTGRES_HOST", "psql-db"),  # Menggunakan variabel lingkungan untuk fleksibilitas
+        database=os.getenv("POSTGRES_DB", "flask_db"),
+        user=os.getenv("POSTGRES_USER", "admin"),
+        password=os.getenv("POSTGRES_PASSWORD", "P4ssw0rd"),
+        port="5432"
+    )
+
 def get_db():
+    """Get a database connection from Flask's context."""
     if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
-        g.db.row_factory = sqlite3.Row
+        g.db = get_pg_db_conn()
     return g.db
 
 def close_db(e=None):
+    """Close the database connection."""
     db = g.pop('db', None)
     if db is not None:
         db.close()
 
+def init_app(app):
+    """Register database-related functions with the app."""
+    app.teardown_appcontext(close_db)
+    
+    # Optionally initialize the database schema
+    # Uncomment the following line if you have a schema.sql to run on startup
+    # init_db()  
+
 def init_db():
+    """Initialize the database with the schema."""
     db = get_db()
     with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
-
-# Register the command with the Flask app
-def init_app(app):
-    app.teardown_appcontext(close_db)
-    app.cli.add_command(click.Command('init-db', callback=init_db))
+        db.cursor().execute(f.read().decode('utf8'))
+    db.commit()
